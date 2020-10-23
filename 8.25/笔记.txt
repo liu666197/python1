@@ -1,0 +1,90 @@
+selenium: 所见即所得 (适合做必须经过登陆才能显示详情的网站)
+
+chrome的插件: xpath (在线测试xpath语句是否生效)
+
+selenium适合爬的网页:
+1.必须经过登陆才能显示详情的网站(账号密码,手机验证码,滑块验证)
+
+2.上拉加载数据: driver.page_source: 滚动一屏以后的源代码 (如果需要解析数据,滚动一屏以后就解析一次)
+
+js代码: 使网页往上滚动: window.scrollTo(0,100)
+
+往上滚动一屏: window.scrollTo(0,document.body.scrollHeight)
+
+https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2316946428,3561244700&amp;fm=26&amp;gp=0.jpg
+
+# 滚动一屏
+driver.execute_script('window.scrollTo(0,document.body.scrollHeight)')
+
+窗口的切换:
+
+当前打开的所有窗口: driver.window_handles  (列表)
+
+切换窗口: driver.switch_to.window(窗口名)
+
+一般的网页都是一个单独的html文件;但是有的登录页面,里面会通过frame或者iframe标签嵌套一个网页(一般就是登录页面)
+
+# 找到对应的iframe标签
+iframe = driver.find_element_by_xpath('//div[@id="loginDiv"]/iframe')
+
+# 得先将driver指向嵌套的网页(iframe): 得先找到对应的iframe
+driver.switch_to.frame(iframe)
+
+滑块验证的原理:
+找到滑块 --> 鼠标在滑块的位置摁下 --> 鼠标移动 --> 设置鼠标移动的距离 --> 移动到对应的位置之后,松开鼠标
+开个循环,一直滑动,直到滑块移动到阴影的位置,下一次再滑动的时候,找不到滑块,执行except(在里面写上验证成功以后的代码即可)
+
+ip如果被封了...换ip (付费)
+
+
+## 大作业要求 (三个网站: 不同类型的网站)
+- 1000-5000行数据
+- 8-15列特征(字段,表头)  (图片名,商品名称,简介,点赞数...)
+- 至少二到三级页面(参考简历下载)
+- 数据源说明文档(写好每个字段什么意思) (爬的网站,字段介绍,数据量)
+- 持久化: JSON文件, CSV文件,mysql
+
+
+# 移动端爬虫的大作业
+- 1000-5000行数据
+- 8-15列特征(字段,表头)  (图片名,商品名称,简介,点赞数...)
+- 至少二到三级页面
+- 数据源说明文档(写好每个字段什么意思) (爬的网站,字段介绍,数据量)
+- 持久化: JSON文件, CSV文件,mysql(右击表-->转储为sql文件 --> 结构和数据)
+
+周五考试: python的知识点以及逻辑编程
+
+交大作业的时间: 截止到8月29号晚10点
+
+
+文件夹(序号名字):
+至少三个py文件
+
+json,csv,sql
+
+数据源说明文档
+
+代理ip的网站: 
+西刺代理 (打不开)
+快代理
+飞猪代理...
+
+url地址: https://域名:端口号
+
+3306: 数据库
+80: 网站的默认端口
+
+指定ip地址访问服务器: proxies
+response = requests.get(url,headers = headers,proxies = {})
+
+{'https': 'ip地址:port'}
+
+{'http': 'ip地址:port'}
+
+付费代理: 智联http
+1.注册
+2.将本机的ip地址填入白名单,代表由本机访问代理ip
+3.购买套餐
+4.API(接口)提取: 获取ip地址
+
+ip代理池: [{'https': 'ip:端口号'},{'https': 'ip:端口号'},{'https': 'ip:端口号'},{'https': 'ip:端口号'},{'https': 'ip:端口号'}]

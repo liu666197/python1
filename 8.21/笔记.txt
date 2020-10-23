@@ -1,0 +1,96 @@
+  xpath的其他语法:
+
+| : 可以获取多个内容  //a/text() | //div/text() | //h1/text()
+
+[下标]: 取对应下标的标签(从1开始)  //div[1]
+
+and or not: 一般针对标签的属性 
+a[@class="a" or @class="b"]
+a[@title="1" and @class="a"]
+a[not (@class="a")]
+
+import: 导入模块(内置,第三方,自己写的模块)
+
+自己写的模块: 自己建立一个py文件
+
+__name__: 当前py文件是否作为模块运行在其他的py文件里面
+	__main__: 运行的是当前的py文件
+
+py文件的变量作为属性,函数作为方法
+
+找接口: 动态数据的接口
+
+动态数据: 网页的其他内容不变,单独变其中的一块内容的数据  (XHR,先清空所有的请求,再让数据发生变化的时候查看)
+
+ajax(前端程序员向后端请求数据的方式): 异步数据加载
+
+下拉刷新,上拉加载(都属于动态数据)
+
+一般服务器返回的数据就是精确的数据
+
+文件系统的模式
+
+r w a
+r+ w+ a+
+
+专门用来操作二进制文件(图片,音频,视频) bytes
+rb(读) wb(写) ab(追加)  (不需要加encoding)
+
+网络的文件请求: 返回的是二进制数据: response.content
+
+下载文件:
+1.拿到文件的接口地址(url)
+2.发送get请求
+3.将服务器返回的二进制数据通过wb模式保存到本地即可
+4.关于保存在本地的文件的名字,最好从url地址中截取
+
+https://img.zcool.cn/community/01e8ba5f3ab614a80120a821abd249.jpg@260w_195h_1c_1e_1o_100sh.jpg
+
+https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png
+
+练习: 把站酷的3页中的图片都下载下来!!
+
+json数据: 和字典基本一样  (一些轻量级的数据,一般用json保存)
+
+response.content: 二进制数据(文件)
+
+response.text: 网页
+
+response.json(): json数据(字典)
+
+pyinstaller: 将python程序打包为应用程序
+
+安装:
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple/ pyinstaller
+
+通过命令进行打包:
+pyinstaller -F py文件路径
+
+程序出现的位置是在你输入打包命令的文件夹dist文件夹里面
+
+创建文件夹:
+import os
+
+判断路径是否存在
+os.path.exists(路径) : True或者False
+
+os.mkdir(文件夹名)
+
+
+酷我音乐盒
+
+
+歌手接口:(30条音乐信息)
+http://www.kuwo.cn/api/www/search/searchMusicBykeyWord?key=%E5%BC%A0%E6%9D%B0&pn=1&rn=30&httpsStatus=1&reqId=3b70b8a0-e385-11ea-9da7-4b2b837551a3
+
+
+天下的接口
+http://www.kuwo.cn/url?format=mp3&rid=145913448&response=url&type=convert_url3&br=128kmp3&from=web&t=1597997541978&httpsStatus=1&reqId=09ebc2b0-e386-11ea-9da7-4b2b837551a3
+
+逆战的接口:
+http://www.kuwo.cn/url?format=mp3&rid=56087176&response=url&type=convert_url3&br=128kmp3&from=web&t=1597997853339&httpsStatus=1&reqId=c381adc1-e386-11ea-9da7-4b2b837551a3
+
+
+http://www.kuwo.cn/url?format=mp3&rid=15807836&response=url&type=convert_url3&br=128kmp3&from=web&t=1597997853339&httpsStatus=1&reqId=c381adc1-e386-11ea-9da7-4b2b837551a3
+
+t: 时间戳(当前时间距离1970年的秒数或者毫秒数)

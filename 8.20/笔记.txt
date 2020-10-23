@@ -1,0 +1,178 @@
+  懒加载: 当用户看到图片的时候才开始加载
+
+接口: 用来发送网络请求的网址
+
+接口不一定是访问网站时候的网址!!!!
+
+如何找接口?
+1.打开开发者工具(右击检查,f12)
+2.到NetWork(查看所有的网络请求)
+3.一般先看与网站的网址相同的那个请求 (点击即可,在右边会显示请求详情)
+4.判断该网址是否为我们需要的接口,看preview(预览),看预览效果和网站的效果是否一致,如果一致,则该请求的网址就是我们需要的接口地址(只是确定了网络请求,并没有确定接口)
+5.如果确定了,回到headers: Request URL才是我们需要的接口地址
+
+关于网络请求:
+get请求: 当页面发生数据变化的时候,地址栏发生相应的变化
+
+post请求: 当页面发生数据变化的时候,地址栏不会发生变化
+
+
+请求的参数: 根据参数的变化,服务器响应的数据也对应的发生变化
+
+get请求的参数: ?key=value&key=value
+
+post请求的参数: 一般在找好接口之后,把headers的页面拉到最底下,接口就在Form Data里面
+
+status code: 状态码
+
+404 : 找不到资源
+
+2开头: 表示服务器响应成功 (200)
+
+4开头: 一般是前端问题 (你的接口写错了)
+
+5开头: 一般是后端问题 (把你的ip地址封掉了)
+
+
+关于请求头: 模拟浏览器 (在headers页面的 Request Headers 位置)
+
+一般写user-agent就搞定了
+
+user-agent: 浏览器标识(用户代理)
+
+如果请求头写了user-agent以后,服务器返回的数据不是我们想要的数据;一般加上cookie即可;如果还不行,看看Request Headers 位置有没有一些特殊的键值对
+
+能不用cookie,尽量不使用;有的网站的cookie时效性非常短
+
+https://www.baidu.com/s?wd=aaa
+
+https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=aaa&fenlei=256&oq=bbb&rsv_pq=a8af646700000211&rsv_t=0109r3YetQ7VYmSB%2BHcQupVD%2FpvMwdbr6AL6QkL4pHuqdOwAeydodcrLClA&rqlang=cn&rsv_enter=1&rsv_dl=tb&rsv_btype=t&inputT=1089&rsv_sug3=8&rsv_sug1=5&rsv_sug7=100&rsv_sug2=0&rsv_sug4=1089
+
+
+https://www.baidu.com/s?wd=%E5%93%88%E5%93%88%E5%93%88
+
+
+unicode编码: 浏览器不识别中文,会自动将中文转化为unicode编码
+
+中文作为参数的时候,转化为浏览器需要的Unicode编码形式:
+import urllib.parse
+
+dic = {
+	key:value,
+	key: value
+}
+result = urllib.parse.urlencode(dic)
+
+编码: 将字符串转bytes类型(二进制数据,b'')  encode
+
+解码: 将bytes类型转化为字符串类型 ('')     decode
+
+用什么方式编码就要用对应的方式解码
+
+post请求: 必须带有参数,参数应该是一个二进制数据(bytes类型)
+
+url.request.Request(url,headers={},data=post请求的参数)
+
+爬虫原理: 模拟浏览器访问网站
+
+反爬: 不让爬虫获取数据
+1.user-agent
+
+2.多条数据(翻页),发送网络请求的速度过快,认定非法访问 (禁ip)  每次发送请求之前,停留一会 
+import time
+time.sleep(秒)
+
+3.多个user-agent,每次发送请求的时候,使用不同的user-agent发送网络请求
+
+4.前面的页面可以爬,但是爬到一定的程度之后,发现你的访问有异常,然后封ip了
+爬一条数据,就把这条数据进行持久化操作(爬一条,存一条)
+
+python的内置模块(库): 只要安装了python环境,import操作,直接就能使用(csv,random,math,urllib.request)
+
+python的第三方模块(库): 属于对内置模块的封装 使用起来要简单
+
+requests模块(库): 可以直接发送请求
+
+要使用第三方模块(库),得自己安装:
+1.直接在pycharm安装(网速要好): File --> settings --> project(第一项)  (从国外的服务器下载,网速慢容易超时)
+
+2.使用命令下载: pip (python的包管理工具,管理模块的卸载和安装) (Terminal)
+	安装: pip install 模块名
+	卸载: pip uninstall 模块名
+	当前安装的模块: pip list
+	从国外服务器下载 (慢)
+
+venv: 是每个工程的虚拟环境(python环境) 在做一些项目的时候,需要安装一些第三方库,但是不是每一个工程都需要该第三方库,所以pycharm会自动帮助工程创建一个venv这样的虚拟环境,所有的该工程需要安装的第三方库只要作用在当前工程里面,不会作用在其他工程里面
+
+所有的模块或者第三方库本质是py文件
+
+3.通过国内镜像源安装:
+	其中，比较常用的国内镜像包括：
+
+（1）阿里云 http://mirrors.aliyun.com/pypi/simple/
+（2）豆瓣http://pypi.douban.com/simple/
+（3）清华大学 https://pypi.tuna.tsinghua.edu.cn/simple/
+（4）中国科学技术大学 http://pypi.mirrors.ustc.edu.cn/simple/
+（5）华中科技大学http://pypi.hustunique.com/
+
+格式: pip install -i 镜像地址 模块名字
+
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple/ requests
+
+http不带s,得信任域名
+
+pip install -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com requests
+
+get请求:
+response = requests.get()
+
+二进制数据: response.content
+
+文本数据: response.text
+
+<meta charset="utf-8">: 能让html文件的中文在浏览器里面显示不乱码
+
+爬虫: 爬取网页中的数据,保存到本地
+
+解析数据:
+1.正则 (一切依赖于良好的代码习惯) 如果可以根据标签间的结构进行数据的解析,就不需要根据程序员的代码习惯去解析了
+
+2.xpath: XML path language (xml路径语言) 通过标签间的结构来定位标签的位置
+
+xpath语法:
+
+// : 一般放在开头,表示全局查找    // 放在中间,表示后代的意思  div//a (a标签只要在div里面就能符合该xpath语句)
+
+//div : 从全局查找div标签 
+
+/ : 父子标签的连接
+
+div/a : div的子标签a span/a : span的子标签a  li/a: li标签的子标签a
+
+[@属性名="属性值"]: 标签的修饰  (区分每个标签)
+
+<div class="x"><a href="#">aaa</a></div>
+<div class="y"><a href="#">bbb</a></div>
+
+div[@class="x"]/a : class值为x的div标签的子标签a
+
+以上的语法是用来找到对应的标签,找到对应的标签以后,我们就可以从该标签里面拿到它的内容
+
+<div>aaa</div>
+
+<img src="内容" title="" alt="">
+
+双标签里面的文字: 标签/text()
+
+获取属性值: 标签/@属性名  img/@src  img/@title
+
+使用xpath,安装lxml模块(第三方): pip install -i https://pypi.tuna.tsinghua.edu.cn/simple/ lxml
+
+from lxml import etree (树结构)
+
+. : 放在开头 从当前标签的位置开始查找
+
+作业:
+1.站酷解析(10页数据,requests结合xpath)  get
+
+2.致设计解析(10页数据,requests结合xpath) post

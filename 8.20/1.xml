@@ -1,0 +1,13 @@
+<movie>
+	<name>八佰</name>
+	<year>2020</year>
+</movie>
+
+<div>
+	<div>
+		<a href="#">文字</a>
+	</div>
+	<p>
+		<span>文字1</span>
+	</p>
+</div>

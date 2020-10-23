@@ -1,0 +1,5 @@
+1.站酷: https://www.zcool.com.cn/
+把该网站的数据保存400条下来;格式和周五要求的格式一样
+
+2.致设计: https://www.zhisheji.com/
+保存该网页的第一页的数据,存入到csv
